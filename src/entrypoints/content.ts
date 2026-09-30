@@ -17,8 +17,7 @@ export default defineContentScript({
     const cleanups = new Map<string, () => void>();
     let settings: Settings = await settingsItem.getValue();
 
-    const sync = () => {
-      const url = new URL(location.href);
+    const sync = (url = new URL(location.href)) => {
       const active: string[] = [];
       for (const rule of rules) {
         const on = isEnabled(settings, rule) && (rule.when?.(url) ?? true);
@@ -35,11 +34,17 @@ export default defineContentScript({
     };
 
     sync();
+    // Settings changes re-evaluate against the last known URL.
+    let currentUrl = new URL(location.href);
     const unwatch = settingsItem.watch((value) => {
       settings = value;
-      sync();
+      sync(currentUrl);
     });
-    ctx.addEventListener(window, 'wxt:locationchange', sync);
+    // The event fires before `location` updates, so use its destination URL.
+    ctx.addEventListener(window, 'wxt:locationchange', ({ newUrl }) => {
+      currentUrl = newUrl;
+      sync(newUrl);
+    });
     ctx.onInvalidated(() => {
       unwatch();
       cleanups.forEach((fn) => fn());
