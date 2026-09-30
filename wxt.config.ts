@@ -7,7 +7,7 @@ export default defineConfig({
   modules: ['@wxt-dev/module-svelte'],
   manifest: {
     name: 'Feed Blocker',
-    description: 'Hide feeds, Shorts and other distractions on social sites.',
+    description: 'Hide feeds, Shorts and stories on social sites.',
     permissions: ['storage', 'activeTab'],
   },
 });
