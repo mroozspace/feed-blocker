@@ -1,9 +1,10 @@
 import { SITES, type SiteId } from '../sites';
+import { facebookRules } from './facebook';
 import { youtubeRules } from './youtube';
 import type { BlockRule } from './types';
 
 // Add a new site's rules file here.
-export const ALL_RULES: BlockRule[] = [...youtubeRules];
+export const ALL_RULES: BlockRule[] = [...youtubeRules, ...facebookRules];
 
 export const rulesForSite = (site: SiteId) => ALL_RULES.filter((r) => r.site === site);
 
