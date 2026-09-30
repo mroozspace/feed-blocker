@@ -38,6 +38,10 @@ export const youtubeRules: BlockRule[] = [
     description: 'Hide the comments section under videos.',
     default: true,
     when: (url) => url.pathname === '/watch',
-    hide: ['ytd-comments#comments'],
+    hide: [
+      'ytd-comments',
+      'ytd-comments-entry-point-header-renderer',
+      'ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-comments-section"]',
+    ],
   },
 ];
