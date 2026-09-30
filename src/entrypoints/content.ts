@@ -3,7 +3,7 @@ import { isEnabled, settingsItem, type Settings } from '@/lib/settings';
 import { siteForHostname } from '@/lib/sites';
 
 export default defineContentScript({
-  matches: ['*://*.youtube.com/*', '*://*.facebook.com/*'],
+  matches: ['*://*.youtube.com/*', '*://*.facebook.com/*', '*://*.instagram.com/*'],
   runAt: 'document_start',
   async main(ctx) {
     const site = siteForHostname(location.hostname);
