@@ -6,6 +6,15 @@ const isHome = (url: URL) => url.pathname === '/' || url.pathname === '/home.php
 
 export const facebookRules: BlockRule[] = [
   {
+    id: 'facebook.home-feed',
+    site: 'facebook',
+    label: 'Home: news feed',
+    description: 'Hide the post feed on the home page.',
+    default: true,
+    when: isHome,
+    hide: ['div[role="feed"]', '[data-pagelet="MainFeed"]', '[data-pagelet^="FeedUnit"]'],
+  },
+  {
     id: 'facebook.home-stories',
     site: 'facebook',
     label: 'Home: stories',
