@@ -31,4 +31,13 @@ export const youtubeRules: BlockRule[] = [
     when: isHome,
     hide: [`${HOME} ytd-feed-filter-chip-bar-renderer`],
   },
+  {
+    id: 'youtube.watch-comments',
+    site: 'youtube',
+    label: 'Video: comments',
+    description: 'Hide the comments section under videos.',
+    default: true,
+    when: (url) => url.pathname === '/watch',
+    hide: ['ytd-comments#comments'],
+  },
 ];
