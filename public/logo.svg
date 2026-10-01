@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <rect width="128" height="128" rx="28" fill="#0b7a6b"/>
+  <!-- feed: three stacked cards -->
+  <rect x="24" y="26" width="80" height="20" rx="7" fill="#fbfbf8"/>
+  <rect x="24" y="54" width="80" height="20" rx="7" fill="#fbfbf8"/>
+  <rect x="24" y="82" width="80" height="20" rx="7" fill="#fbfbf8"/>
+  <!-- block slash, with a teal halo that cuts through the cards -->
+  <line x1="30" y1="104" x2="98" y2="24" stroke="#0b7a6b" stroke-width="22" stroke-linecap="round"/>
+  <line x1="30" y1="104" x2="98" y2="24" stroke="#fbfbf8" stroke-width="9" stroke-linecap="round"/>
+</svg>
