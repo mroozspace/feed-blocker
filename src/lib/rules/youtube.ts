@@ -44,4 +44,13 @@ export const youtubeRules: BlockRule[] = [
       'ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-comments-section"]',
     ],
   },
+  {
+    id: 'youtube.watch-related',
+    site: 'youtube',
+    label: 'Video page: suggestions',
+    description: 'Hide the related videos column next to the player.',
+    default: true,
+    when: (url) => url.pathname === '/watch',
+    hide: ['ytd-watch-flexy #related', 'ytd-watch-next-secondary-results-renderer'],
+  },
 ];
