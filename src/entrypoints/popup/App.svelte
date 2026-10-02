@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { browser } from 'wxt/browser';
-  import { ruleGroups } from '@/lib/rules';
+  import { ALL_RULES, ruleGroups } from '@/lib/rules';
   import { isEnabled, settingsItem, type Settings } from '@/lib/settings';
   import { siteForHostname } from '@/lib/sites';
 
@@ -37,6 +37,13 @@
     };
   });
 
+  const allOn = $derived(ALL_RULES.every((r) => isEnabled(settings, r)));
+
+  function toggleAll() {
+    settings = Object.fromEntries(ALL_RULES.map((r) => [r.id, !allOn]));
+    settingsItem.setValue($state.snapshot(settings));
+  }
+
   function toggle(id: string, checked: boolean) {
     settings = { ...settings, [id]: checked };
     settingsItem.setValue($state.snapshot(settings));
@@ -44,7 +51,10 @@
 </script>
 
 <main>
-  <h1><img src="/logo.svg" alt="" width="24" height="24" />Feed Blocker</h1>
+  <header>
+    <h1><img src="/logo.svg" alt="" width="24" height="24" />Feed Blocker</h1>
+    <button class="all" onclick={toggleAll}>{allOn ? 'Turn all off' : 'Turn all on'}</button>
+  </header>
   <div class="frame">
     <div class="scroll" bind:this={scroller} onscroll={updateMore}>
       <div class="content">
@@ -91,6 +101,31 @@
     box-sizing: border-box;
     padding: 16px;
   }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 12px;
+  }
+  .all {
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .all:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .all:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
   h1 {
     display: flex;
     align-items: center;
@@ -98,7 +133,7 @@
     font-size: 17px;
     font-weight: 700;
     letter-spacing: -0.01em;
-    margin: 0 0 12px;
+    margin: 0;
   }
   .frame {
     position: relative;
